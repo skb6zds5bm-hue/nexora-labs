@@ -158,14 +158,40 @@ footer{background:#111;color:white;padding:38px 5%;font-size:11px;line-height:1.
 // Lisa ja muuda tooteid siin.
 // Pildiks pane enda või tarnija loal kasutatav pildi URL.
 const products=[
-{id:1,brand:"NEXORA EDIT",name:"Relaxed fit hoodie",cat:"Clothing",price:34.99,old:59.99,img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?auto=format&fit=crop&w=850&q=85"},
-{id:2,brand:"NEXORA EDIT",name:"Classic low sneakers",cat:"Footwear",price:54.99,old:79.99,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=850&q=85"},
-{id:3,brand:"NEXORA EDIT",name:"Puffer jacket",cat:"Clothing",price:79.99,old:119.99,img:"https://images.unsplash.com/photo-1544923246-77307dd654cb?auto=format&fit=crop&w=850&q=85"},
-{id:4,brand:"NEXORA EDIT",name:"Minimal steel watch",cat:"Accessories",price:39.99,old:64.99,img:"https://images.unsplash.com/photo-1524592094714-0f0654e20314?auto=format&fit=crop&w=850&q=85"},
-{id:5,brand:"NEXORA EDIT",name:"Amber fragrance",cat:"Fragrances",price:29.99,old:44.99,img:"https://images.unsplash.com/photo-1541643600914-78b084683601?auto=format&fit=crop&w=850&q=85"},
-{id:6,brand:"NEXORA EDIT",name:"Essential cotton tee",cat:"Clothing",price:19.99,old:29.99,img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?auto=format&fit=crop&w=850&q=85"},
-{id:7,brand:"NEXORA EDIT",name:"Retro runner",cat:"Footwear",price:49.99,old:69.99,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=850&q=85"},
-{id:8,brand:"NEXORA EDIT",name:"Silver chain necklace",cat:"Accessories",price:24.99,old:39.99,img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?auto=format&fit=crop&w=850&q=85"}
+
+const products=[
+{id:1,brand:"Fear of God Essentials",name:"Essentials Oversized Hoodie",cat:"Clothing",price:89.99,old:120,img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
+{id:2,brand:"Fear of God Essentials",name:"Essentials Tracksuit",cat:"Clothing",price:119.99,old:160,img:"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=700"},
+{id:3,brand:"BAPE",name:"BAPE Shark Hoodie",cat:"Clothing",price:249.99,old:320,img:"https://images.unsplash.com/photo-1578681994506-b8f463449011?w=700"},
+{id:4,brand:"BAPE",name:"BAPE Graphic T-Shirt",cat:"Clothing",price:79.99,old:110,img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"},
+{id:5,brand:"Polo Ralph Lauren",name:"Polo Classic Hoodie",cat:"Clothing",price:99.99,old:140,img:"https://images.unsplash.com/photo-1618354691373-d851c5c3a990?w=700"},
+{id:6,brand:"Polo Ralph Lauren",name:"Polo Cable Knit Sweater",cat:"Clothing",price:109.99,old:150,img:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=700"},
+{id:7,brand:"AMI Paris",name:"AMI Heart Logo Sweatshirt",cat:"Clothing",price:149.99,old:190,img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
+{id:8,brand:"Louis Vuitton",name:"LV Monogram T-Shirt",cat:"Clothing",price:399.99,old:490,img:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?w=700"},
+{id:9,brand:"Balenciaga",name:"Balenciaga Oversized Hoodie",cat:"Clothing",price:449.99,old:590,img:"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=700"},
+{id:10,brand:"Nike",name:"Nike Tech Fleece Set",cat:"Clothing",price:129.99,old:170,img:"https://images.unsplash.com/photo-1551488831-00ddcb6c6bd3?w=700"},
+{id:11,brand:"Nike",name:"Nike Air Force 1 White",cat:"Footwear",price:119.99,old:140,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"},
+{id:12,brand:"Nike",name:"Air Jordan 1 Retro",cat:"Footwear",price:159.99,old:190,img:"https://images.unsplash.com/photo-1552346154-21d32810aba3?w=700"},
+{id:13,brand:"Nike",name:"Nike Dunk Low",cat:"Footwear",price:109.99,old:135,img:"https://images.unsplash.com/photo-1600269452121-4f2416e55c28?w=700"},
+{id:14,brand:"Adidas",name:"Adidas Samba OG",cat:"Footwear",price:99.99,old:120,img:"https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77?w=700"},
+{id:15,brand:"New Balance",name:"New Balance 9060",cat:"Footwear",price:149.99,old:180,img:"https://images.unsplash.com/photo-1495555961986-6d4c1ecb7be3?w=700"},
+{id:16,brand:"Balenciaga",name:"Balenciaga Runner Sneakers",cat:"Footwear",price:499.99,old:650,img:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=700"},
+{id:17,brand:"Louis Vuitton",name:"LV Monogram Belt",cat:"Accessories",price:349.99,old:420,img:"https://images.unsplash.com/photo-1624222247344-550fb8c7b6f7?w=700"},
+{id:18,brand:"Gucci",name:"Leather Designer Belt",cat:"Accessories",price:299.99,old:390,img:"https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=700"},
+{id:19,brand:"Polo Ralph Lauren",name:"Polo Cap",cat:"Accessories",price:49.99,old:65,img:"https://images.unsplash.com/photo-1588850561407-ed78c282e89b?w=700"},
+{id:20,brand:"NEXORA EDIT",name:"Minimal Steel Watch",cat:"Accessories",price:79.99,old:110,img:"https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=700"},
+{id:21,brand:"Louis Vuitton",name:"Monogram Shoulder Bag",cat:"Accessories",price:599.99,old:750,img:"https://images.unsplash.com/photo-1584917865442-de89df76afd3?w=700"},
+{id:22,brand:"NEXORA EDIT",name:"Silver Chain Necklace",cat:"Accessories",price:29.99,old:45,img:"https://images.unsplash.com/photo-1611591437281-460bfbe1220a?w=700"},
+{id:23,brand:"Valentino",name:"Valentino Born in Roma",cat:"Fragrances",price:99.99,old:125,img:"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=700"},
+{id:24,brand:"Giorgio Armani",name:"Acqua di Gio",cat:"Fragrances",price:89.99,old:115,img:"https://images.unsplash.com/photo-1541643600914-78b084683601?w=700"},
+{id:25,brand:"Dior",name:"Sauvage Eau de Parfum",cat:"Fragrances",price:109.99,old:140,img:"https://images.unsplash.com/photo-1592945403244-b3fbafd7f539?w=700"},
+{id:26,brand:"Yves Saint Laurent",name:"Y EDP",cat:"Fragrances",price:99.99,old:130,img:"https://images.unsplash.com/photo-1594035910387-fea47794261f?w=700"},
+{id:27,brand:"Versace",name:"Eros Eau de Toilette",cat:"Fragrances",price:69.99,old:90,img:"https://images.unsplash.com/photo-1541643600914-78b084683601?w=700"},
+{id:28,brand:"Polo Ralph Lauren",name:"Polo Surprise Box – 3 Sweaters",cat:"Clothing",price:149.99,old:220,img:"https://images.unsplash.com/photo-1576566588028-4147f3842f27?w=700"},
+{id:29,brand:"NEXORA",name:"Streetwear Mystery Box – 3 Items",cat:"Clothing",price:79.99,old:120,img:"https://images.unsplash.com/photo-1556821840-3a63f95609a7?w=700"},
+{id:30,brand:"NEXORA",name:"Premium Mystery Box – 5 Items",cat:"Clothing",price:129.99,old:190,img:"https://images.unsplash.com/photo-1552902865-b72c031ac5ea?w=700"}
+];
+
 ];
 
 let cart=[];
