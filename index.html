@@ -249,5 +249,243 @@ function hideBag(){
 drawChips();
 render();
 </script>
+ 
+<style>
+/* NEXORA layout */
+.categories{
+ display:grid!important;
+ grid-template-columns:repeat(3,minmax(0,1fr))!important;
+ gap:9px!important;
+}
+.categories .chip{
+ min-height:58px;
+ padding:9px 4px!important;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+ font-size:10px!important;
+ letter-spacing:1px;
+}
+.card{cursor:pointer}
+.card .photo img{cursor:pointer}
+.card button{cursor:pointer}
+#nexora-detail{
+ display:none;position:fixed;inset:0;background:#fff;
+ z-index:100;overflow:auto;padding:15px 5% 40px;
+}
+#nexora-detail.open{display:block}
+.nd-head{
+ display:flex;justify-content:space-between;align-items:center;
+ border-bottom:1px solid #eee;padding:12px 0 18px;
+}
+.nd-head button{border:0;background:white;font-size:14px}
+.nd-content{max-width:760px;margin:20px auto}
+#nd-image{
+ width:100%;max-height:480px;object-fit:contain;
+ background:#f7f7f7;display:block;
+}
+#nd-name{font-size:clamp(25px,6vw,38px);font-weight:900;margin:22px 0 8px}
+#nd-price{font-size:28px;font-weight:900}
+.nd-label{font-weight:bold;margin:25px 0 10px}
+.nd-options{display:flex;gap:9px;flex-wrap:wrap}
+.nd-option{
+ min-width:58px;padding:13px 16px;border:1px solid #ddd;
+ background:white;font-weight:bold;
+}
+.nd-option.selected{background:#111;color:white;border-color:#111}
+#nd-add{
+ width:100%;padding:18px;background:#111;color:white;
+ border:0;font-weight:bold;margin-top:28px;
+}
+.nd-back{
+ width:100%;padding:16px;background:white;
+ border:1px solid #111;margin-top:10px;
+}
+@media(max-width:600px){
+ .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+ .categories{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+}
+</style>
+
+<div id="nexora-detail">
+ <div class="nd-head">
+  <strong class="logo">NEXORA</strong>
+  <button onclick="closeNexoraDetail()">CLOSE ✕</button>
+ </div>
+ <div class="nd-content">
+  <img id="nd-image" alt="">
+  <div class="meta" id="nd-cat"></div>
+  <div id="nd-name"></div>
+  <div id="nd-price"></div>
+
+  <div class="nd-label">Color</div>
+  <div class="nd-options" id="nd-colors"></div>
+
+  <div class="nd-label">Size</div>
+  <div class="nd-options" id="nd-sizes"></div>
+
+  <div class="nd-label">Quantity</div>
+  <div class="nd-options" id="nd-quantity">
+   <button class="nd-option selected" onclick="chooseNDQty(1)">1</button>
+   <button class="nd-option" onclick="chooseNDQty(2)">2</button>
+   <button class="nd-option" onclick="chooseNDQty(3)">3</button>
+  </div>
+
+  <button id="nd-add" onclick="addNDToBag()">ADD TO BAG</button>
+  <button class="nd-back" onclick="closeNexoraDetail()">BACK TO COLLECTION</button>
+ </div>
+</div>
+
+<script>
+(()=>{
+ const priceMap={
+  "Essentials Hoodie — Grey":13.99,
+  "Supreme Hoodie — Navy":13.99,
+  "Supreme Denim Shorts":11.99,
+  "Supreme T-Shirt — White":8.99,
+  "Tom Ford Lost Cherry":8.99,
+  "Valentino Fragrance":9.99,
+  "Xerjoff Erba Pura":9.99,
+  "Yeezy Slide — Beige":11.99
+ };
+
+ let selectedProduct=null;
+ let selectedColor="";
+ let selectedSize="";
+ let selectedQty=1;
+
+ const clothing=["Clothing"];
+ const shoes=["Footwear"];
+
+ function makeOptions(id,values,chosen,callback){
+  const el=document.getElementById(id);
+  el.innerHTML="";
+  values.forEach(value=>{
+   const b=document.createElement("button");
+   b.className="nd-option"+(value===chosen?" selected":"");
+   b.textContent=value;
+   b.onclick=()=>callback(value);
+   el.appendChild(b);
+  });
+ }
+
+ window.openNexoraDetail=function(file){
+  selectedProduct=products.find(p=>p.file===file);
+  if(!selectedProduct)return;
+
+  const p=selectedProduct;
+  const isClothing=clothing.includes(p.cat);
+  const isShoes=shoes.includes(p.cat);
+
+  document.getElementById("nd-image").src="./"+p.file;
+  document.getElementById("nd-name").textContent=p.name;
+  document.getElementById("nd-cat").textContent=p.cat.toUpperCase();
+
+  const price=priceMap[p.name];
+  document.getElementById("nd-price").textContent=
+   price===undefined?"Price on request":"€"+price.toFixed(2);
+
+  const colorOptions=isClothing||isShoes?
+   ["Black","White","Grey","Navy","Beige"]:["One size"];
+
+  const sizeOptions=isClothing?
+   ["XS","S","M","L","XL"]:
+   isShoes?["39","40","41","42","43","44","45"]:["One size"];
+
+  selectedColor=colorOptions[0];
+  selectedSize=sizeOptions[0];
+  selectedQty=1;
+
+  makeOptions("nd-colors",colorOptions,selectedColor,v=>{
+   selectedColor=v;
+   makeOptions("nd-colors",colorOptions,selectedColor,arguments.callee);
+  });
+
+  makeOptions("nd-sizes",sizeOptions,selectedSize,v=>{
+   selectedSize=v;
+   makeOptions("nd-sizes",sizeOptions,selectedSize,arguments.callee);
+  });
+
+  chooseNDQty(1);
+  document.getElementById("nexora-detail").classList.add("open");
+  document.body.style.overflow="hidden";
+ };
+
+ window.chooseNDQty=function(n){
+  selectedQty=n;
+  document.querySelectorAll("#nd-quantity button").forEach((b,i)=>{
+   b.classList.toggle("selected",i+1===n);
+  });
+ };
+
+ window.closeNexoraDetail=function(){
+  document.getElementById("nexora-detail").classList.remove("open");
+  document.body.style.overflow="";
+ };
+
+ window.addNDToBag=function(){
+  if(!selectedProduct)return;
+  for(let i=0;i<selectedQty;i++){
+   basket.push({
+    file:selectedProduct.file,
+    color:selectedColor,
+    size:selectedSize
+   });
+  }
+  document.getElementById("qty").textContent=basket.length;
+  closeNexoraDetail();
+  showBag();
+ };
+
+ window.render=function(){
+  const q=document.getElementById("q").value.toLowerCase();
+  let list=products.filter(p=>
+   (active==="All"||p.cat===active)&&
+   p.name.toLowerCase().includes(q)
+  );
+  const sort=document.getElementById("sort").value;
+  if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
+  if(sort==="za")list.sort((a,b)=>b.name.localeCompare(a.name));
+
+  document.getElementById("count").textContent=list.length+" PRODUCTS";
+
+  document.getElementById("grid").innerHTML=list.map(p=>{
+   const price=priceMap[p.name];
+   return `<article class="card" onclick="openNexoraDetail('${p.file}')">
+    <div class="photo">
+     <img src="./${p.file}" alt="${p.name}" loading="lazy">
+    </div>
+    <h3>${p.name}</h3>
+    <div class="meta">${p.cat}</div>
+    <div class="price">${price===undefined?"Price on request":"€"+price.toFixed(2)}</div>
+    <button onclick="event.stopPropagation();openNexoraDetail('${p.file}')">VIEW PRODUCT</button>
+   </article>`;
+  }).join("")||'<div class="empty">No products found.</div>';
+ };
+
+ window.showBag=function(){
+  document.getElementById("bag").style.display="block";
+  document.getElementById("bagitems").innerHTML=basket.map((item,i)=>{
+   const file=typeof item==="string"?item:item.file;
+   const p=products.find(x=>x.file===file);
+   if(!p)return "";
+   const options=typeof item==="string"?"":`<br><small>${item.color} · ${item.size}</small>`;
+   return `<div class="bagitem">${p.name}${options}
+    <button onclick="removeNexoraItem(${i})">×</button></div>`;
+  }).join("")||"<p>Your bag is empty.</p>";
+  document.getElementById("sum").textContent="Demo catalogue";
+ };
+
+ window.removeNexoraItem=function(i){
+  basket.splice(i,1);
+  document.getElementById("qty").textContent=basket.length;
+  showBag();
+ };
+
+ render();
+})();
+</script>
+
 </body>
 </html>
