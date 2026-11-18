@@ -1,27 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="et">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>NEXORA</title>
+<title>NEXORA — The Collection</title>
 <style>
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;color:#111}
-.top{background:#111;color:white;text-align:center;padding:11px;font-size:10px;letter-spacing:2px}
-header{position:sticky;top:0;background:white;border-bottom:1px solid #eee;padding:17px 5%;display:flex;justify-content:space-between;align-items:center;z-index:5}
+body{margin:0;background:#fff;color:#111;font-family:Arial,sans-serif}
+.top{background:#111;color:#fff;text-align:center;padding:11px;font-size:10px;letter-spacing:2px}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:17px 5%;display:flex;justify-content:space-between;align-items:center;z-index:5}
 .logo{font-size:25px;font-weight:900;letter-spacing:5px}
-button{cursor:pointer}
-.bagbtn{background:#111;color:white;border:0;padding:12px 16px;font-size:11px}
-.hero{margin:25px auto;width:90%;background:#171717;color:white;padding:55px 6%}
+button{cursor:pointer;font-family:inherit}
+.bagbtn{background:#111;color:#fff;border:0;padding:12px 16px;font-size:11px}
+.hero{margin:25px auto;width:90%;background:#171717;color:#fff;padding:55px 6%}
 .hero small{letter-spacing:3px;color:#aaa}
 .hero h1{font-size:clamp(38px,8vw,75px);margin:18px 0}
 .hero p{color:#ccc;font-size:13px}
 .wrap{width:90%;max-width:1400px;margin:40px auto}
 .categories{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
-.chip{border:1px solid #ddd;background:white;padding:11px 15px;font-size:10px;letter-spacing:1px}
-.chip.active{background:#111;color:white;border-color:#111}
+.chip{border:1px solid #ddd;background:#fff;padding:11px 15px;font-size:10px;letter-spacing:1px}
+.chip.active{background:#111;color:#fff;border-color:#111}
 .filters{display:flex;gap:10px;margin:20px 0}
-input,select{padding:13px;border:1px solid #ddd;background:white;min-width:0}
+input,select{padding:13px;border:1px solid #ddd;background:#fff;min-width:0}
 input{flex:2}
 .filters select{flex:1}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px 15px}
@@ -31,14 +32,14 @@ input{flex:2}
 .card h3{font-size:13px;line-height:1.4;margin:10px 0 5px}
 .meta{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px}
 .price{font-size:13px;font-weight:bold;margin-top:9px}
-.card button{width:100%;background:#111;color:white;border:0;padding:12px;margin-top:10px;font-size:10px;letter-spacing:1px}
+.card button{width:100%;background:#111;color:#fff;border:0;padding:12px;margin-top:10px;font-size:10px;letter-spacing:1px}
 #count{font-size:11px;color:#777}
 .empty{text-align:center;padding:50px;color:#777}
-footer{background:#111;color:white;padding:40px 5%;margin-top:60px}
+footer{background:#111;color:#fff;padding:40px 5%;margin-top:60px}
 footer p{color:#aaa;font-size:11px;line-height:1.8}
-#bag{display:none;position:fixed;z-index:10;right:0;top:0;height:100%;width:min(390px,100%);background:white;box-shadow:0 0 0 100vmax #0008;padding:22px;overflow:auto}
+#bag{display:none;position:fixed;z-index:10;right:0;top:0;height:100%;width:min(390px,100%);background:#fff;box-shadow:0 0 0 100vmax #0008;padding:22px;overflow:auto}
 .baghead{display:flex;justify-content:space-between;align-items:center}
-.baghead button{border:0;background:white}
+.baghead button{border:0;background:#fff}
 .bagitem{padding:13px 0;border-bottom:1px solid #eee;font-size:12px}
 @media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){
@@ -70,7 +71,6 @@ footer p{color:#aaa;font-size:11px;line-height:1.8}
 <main class="wrap">
 <h2>Shop collection</h2>
 <div id="count"></div>
-
 <div class="categories" id="chips"></div>
 
 <div class="filters">
@@ -102,133 +102,148 @@ footer p{color:#aaa;font-size:11px;line-height:1.8}
 
 <script>
 const products = [
-{n:1,c:'Clothing',t:'Stone Island Zip Jacket'},
-{n:2,c:'Clothing',t:'Stüssy Hoodie — Black'},
-{n:3,c:'Clothing',t:'Stüssy T-Shirt — Black'},
-{n:4,c:'Clothing',t:'Stüssy Zip Hoodie — Grey'},
-{n:5,c:'Clothing',t:'Stone Island Zip Hoodie'},
-{n:6,c:'Clothing',t:'Stone Island Sweatshirt'},
-{n:7,c:'Clothing',t:'Stone Island Sweatpants'},
-{n:8,c:'Clothing',t:'Stüssy T-Shirt'},
-{n:9,c:'Clothing',t:'Colourful Sweater Bundle'},
-{n:10,c:'Clothing',t:'Supreme Hoodie — Navy'},
-{n:11,c:'Clothing',t:'Graphic Hoodie'},
-{n:12,c:'Clothing',t:'Stone Island Shorts — White'},
-{n:13,c:'Clothing',t:'Polo Ralph Lauren Zip Jacket'},
-{n:14,c:'Clothing',t:'Shorts — White'},
-{n:15,c:'Clothing',t:'Track Pants — Navy'},
-{n:16,c:'Clothing',t:'T-Shirt — White'},
-{n:17,c:'Clothing',t:'Graphic Hoodie'},
-{n:18,c:'Clothing',t:'Denim Jeans'},
-{n:19,c:'Clothing',t:'Polo Shirt — Blue'},
-{n:20,c:'Clothing',t:'Colourful Jeans Bundle'},
-{n:21,c:'Clothing',t:'Dior Jeans'},
-{n:22,c:'Clothing',t:'Essentials Sweatpants'},
-{n:23,c:'Clothing',t:'Evisu Jeans'},
-{n:24,c:'Clothing',t:'Ralph Lauren Bear T-Shirt'},
-{n:25,c:'Clothing',t:'Arc’teryx Jacket'},
-{n:26,c:'Clothing',t:'Balenciaga Hoodie'},
-{n:27,c:'Clothing',t:'Balenciaga x Gap Hoodie'},
-{n:28,c:'Clothing',t:'Chrome Hearts Long Sleeve'},
-{n:29,c:'Clothing',t:'Vintage Clothing Box'},
-{n:30,c:'Clothing',t:'AMI Paris Sweatshirt'},
-{n:31,c:'Clothing',t:'Balenciaga Jacket'},
-{n:32,c:'Clothing',t:'Balenciaga Sweatshirt'},
-{n:33,c:'Clothing',t:'Essentials Shorts'},
-{n:34,c:'Clothing',t:'Essentials Hoodie'},
-{n:35,c:'Clothing',t:'BAPE Hoodie'},
-{n:36,c:'Clothing',t:'BAPE T-Shirt'},
+{file:"IMG_3646.webp",name:"Essentials Shorts — Grey",cat:"Clothing"},
+{file:"IMG_3647.webp",name:"Essentials Hoodie — Grey",cat:"Clothing"},
+{file:"IMG_3648.webp",name:"BAPE Shark Zip Hoodie",cat:"Clothing"},
+{file:"IMG_3649.webp",name:"BAPE Graphic T-Shirt",cat:"Clothing"},
+{file:"IMG_3650.webp",name:"Polo Ralph Lauren Cable Knit Sweater",cat:"Clothing"},
+{file:"IMG_3651.webp",name:"Polo Ralph Lauren Zip Hoodie",cat:"Clothing"},
+{file:"IMG_3652.webp",name:"Polo Ralph Lauren Sweater Bundle",cat:"Mystery Boxes"},
+{file:"IMG_3653.webp",name:"AMI Paris Sweater",cat:"Clothing"},
 
-{n:37,c:'Footwear',t:'Black Running Sneakers'},
-{n:38,c:'Footwear',t:'Black Low-Top Sneakers'},
-{n:39,c:'Footwear',t:'Maison Margiela Sneakers'},
-{n:40,c:'Footwear',t:'Black Sneakers'},
-{n:41,c:'Footwear',t:'Jordan 4 Sneakers'},
-{n:42,c:'Footwear',t:'Yeezy Slides — Beige'},
-{n:43,c:'Footwear',t:'Birkenstock Sandals'},
-{n:44,c:'Footwear',t:'Nike Air Max 95 Corteiz'},
-{n:45,c:'Footwear',t:'Black Running Sneakers'},
-{n:46,c:'Footwear',t:'Black Low-Top Sneakers'},
-{n:47,c:'Footwear',t:'Maison Margiela Sneakers'},
-{n:48,c:'Footwear',t:'Black Sneakers'},
-{n:49,c:'Footwear',t:'Birkenstock Sandals'},
-{n:50,c:'Footwear',t:'Nike Air Max 95 Corteiz'},
-{n:51,c:'Footwear',t:'Louis Vuitton Skate Sneakers'},
+{file:"IMG_3675.webp",name:"AirPods Pro",cat:"Electronics"},
+{file:"IMG_3676.webp",name:"AirPods Max",cat:"Electronics"},
+{file:"IMG_3678.webp",name:"Apple Watch",cat:"Electronics"},
+{file:"IMG_3679.webp",name:"Arc'teryx Jacket",cat:"Clothing"},
+{file:"IMG_3680.webp",name:"Audemars Piguet Watch",cat:"Accessories"},
+{file:"IMG_3681.webp",name:"Balenciaga Hoodie",cat:"Clothing"},
+{file:"IMG_3682.webp",name:"Yeezy Gap Hoodie",cat:"Clothing"},
 
-{n:53,c:'Accessories',t:'Rolex Watch'},
-{n:54,c:'Accessories',t:'Audemars Piguet Watch'},
-{n:55,c:'Accessories',t:'Designer Belt'},
-{n:56,c:'Accessories',t:'Goyard Wallet'},
+{file:"IMG_3685.webp",name:"Designer Belt Bundle",cat:"Accessories"},
+{file:"IMG_3686.webp",name:"Birkenstock Boston Clog",cat:"Footwear"},
+{file:"IMG_3687.webp",name:"Bleu de Chanel",cat:"Fragrances"},
+{file:"IMG_3688.webp",name:"Chrome Hearts Long Sleeve",cat:"Clothing"},
+{file:"IMG_3689.webp",name:"Fragrance Mystery Box",cat:"Mystery Boxes"},
+{file:"IMG_3690.webp",name:"Creed Aventus",cat:"Fragrances"},
+{file:"IMG_3691.webp",name:"Washed Grey Jeans",cat:"Clothing"},
+{file:"IMG_3692.webp",name:"Black Technical Sneakers",cat:"Footwear"},
+{file:"IMG_3693.webp",name:"Dyson Airwrap",cat:"Electronics"},
 
-{n:57,c:'Fragrances',t:'Emporio Armani Stronger With You Intensely'},
-{n:58,c:'Fragrances',t:'Valentino Fragrance'},
-{n:59,c:'Fragrances',t:'Fragrance Gift Set'},
-{n:60,c:'Fragrances',t:'Jean Paul Gaultier Fragrance'},
-{n:61,c:'Fragrances',t:'Louis Vuitton Imagination'},
-{n:62,c:'Fragrances',t:'Bleu de Chanel'},
-{n:63,c:'Fragrances',t:'Creed Aventus'},
-{n:64,c:'Fragrances',t:'Parfums de Marly'},
-{n:65,c:'Fragrances',t:'Tom Ford Lost Cherry'},
-{n:66,c:'Fragrances',t:'Xerjoff Erba Pura'},
-{n:67,c:'Fragrances',t:'Yves Saint Laurent Fragrance'}
+{file:"IMG_3696.webp",name:"Essentials Sweatpants",cat:"Clothing"},
+{file:"IMG_3697.webp",name:"Evisu Jeans",cat:"Clothing"},
+{file:"IMG_3698.webp",name:"Goyard Cardholder",cat:"Accessories"},
+{file:"IMG_3699.webp",name:"Leather Belt — H Buckle",cat:"Accessories"},
+{file:"IMG_3700.webp",name:"iPhone Pro",cat:"Electronics"},
+{file:"IMG_3701.webp",name:"Jean Paul Gaultier Le Male",cat:"Fragrances"},
+{file:"IMG_3702.webp",name:"Jordan 4 Sneakers",cat:"Footwear"},
+{file:"IMG_3703.webp",name:"Lacoste Clothing Bundle",cat:"Mystery Boxes"},
+{file:"IMG_3704.webp",name:"Black Low-Top Sneakers",cat:"Footwear"},
+
+{file:"IMG_3705.webp",name:"Louis Vuitton Belt",cat:"Accessories"},
+{file:"IMG_3706.webp",name:"Louis Vuitton Bracelet",cat:"Accessories"},
+{file:"IMG_3707.webp",name:"Louis Vuitton Imagination",cat:"Fragrances"},
+{file:"IMG_3708.webp",name:"Louis Vuitton Duffle Bag",cat:"Accessories"},
+{file:"IMG_3709.webp",name:"Louis Vuitton Scarf",cat:"Accessories"},
+{file:"IMG_3710.webp",name:"Louis Vuitton Sneakers",cat:"Footwear"},
+{file:"IMG_3711.webp",name:"Maison Margiela GAT Sneakers",cat:"Footwear"},
+{file:"IMG_3712.webp",name:"Moncler T-Shirt",cat:"Clothing"},
+{file:"IMG_3713.webp",name:"Nike Air Force 1 — Black",cat:"Footwear"},
+{file:"IMG_3714.webp",name:"Nike Air Max 95 Corteiz",cat:"Footwear"},
+{file:"IMG_3715.webp",name:"Nike Clothing Bundle",cat:"Mystery Boxes"},
+{file:"IMG_3716.webp",name:"Parfums de Marly Fragrance",cat:"Fragrances"},
+{file:"IMG_3717.webp",name:"Mixed Clothing Mystery Box",cat:"Mystery Boxes"},
+
+{file:"IMG_3718.webp",name:"Polo Ralph Lauren Bear T-Shirt",cat:"Clothing"},
+{file:"IMG_3719.webp",name:"Polo Ralph Lauren Clothing Bundle",cat:"Mystery Boxes"},
+{file:"IMG_3720.webp",name:"Polo Ralph Lauren Flag Sweater",cat:"Clothing"},
+{file:"IMG_3722.webp",name:"Polo Ralph Lauren Chino Pants",cat:"Clothing"},
+{file:"IMG_3724.webp",name:"Polo Ralph Lauren Polo Shirt",cat:"Clothing"},
+{file:"IMG_3725.webp",name:"Polo Ralph Lauren Polo Bundle",cat:"Mystery Boxes"},
+{file:"IMG_3726.webp",name:"Polo Ralph Lauren Quarter-Zip",cat:"Clothing"},
+{file:"IMG_3727.webp",name:"Polo Ralph Lauren Shorts",cat:"Clothing"},
+{file:"IMG_3728.webp",name:"Polo Ralph Lauren Sweatpants",cat:"Clothing"},
+{file:"IMG_3729.webp",name:"Polo Ralph Lauren T-Shirt — White",cat:"Clothing"},
+{file:"IMG_3730.webp",name:"Polo Ralph Lauren T-Shirt Bundle",cat:"Mystery Boxes"},
+
+{file:"IMG_3732.webp",name:"Rolex Datejust Watch",cat:"Accessories"},
+{file:"IMG_3733.webp",name:"Spider Graphic Hoodie",cat:"Clothing"},
+{file:"IMG_3734.webp",name:"Stone Island Hoodie",cat:"Clothing"},
+{file:"IMG_3735.webp",name:"Stone Island Jacket",cat:"Clothing"},
+{file:"IMG_3736.webp",name:"Stone Island Shorts",cat:"Clothing"},
+{file:"IMG_3737.webp",name:"Stone Island Sweatshirt",cat:"Clothing"},
+{file:"IMG_3738.webp",name:"Stone Island Sweatpants",cat:"Clothing"},
+{file:"IMG_3739.webp",name:"Stone Island T-Shirt",cat:"Clothing"},
+{file:"IMG_3740.webp",name:"Stone Island Zip Hoodie",cat:"Clothing"},
+{file:"IMG_3741.webp",name:"Emporio Armani Stronger With You Intensely",cat:"Fragrances"},
+{file:"IMG_3742.webp",name:"Stüssy Hoodie",cat:"Clothing"},
+{file:"IMG_3743.webp",name:"Stüssy T-Shirt",cat:"Clothing"},
+{file:"IMG_3744.webp",name:"Stüssy Zip Hoodie",cat:"Clothing"},
+{file:"IMG_3745.webp",name:"Supreme Hoodie — Navy",cat:"Clothing"},
+{file:"IMG_3746.webp",name:"Supreme Denim Shorts",cat:"Clothing"},
+{file:"IMG_3747.webp",name:"Supreme T-Shirt — White",cat:"Clothing"},
+{file:"IMG_3748.webp",name:"Tom Ford Lost Cherry",cat:"Fragrances"},
+{file:"IMG_3749.webp",name:"Valentino Fragrance",cat:"Fragrances"},
+{file:"IMG_3750.webp",name:"Xerjoff Erba Pura",cat:"Fragrances"},
+{file:"IMG_3751.webp",name:"Yeezy Slide — Beige",cat:"Footwear"},
+{file:"IMG_3752.webp",name:"Yves Saint Laurent Fragrance",cat:"Fragrances"}
 ];
 
-const cats=['All','Clothing','Footwear','Accessories','Fragrances'];
-let active='All';
+const cats=["All","Clothing","Footwear","Accessories","Fragrances","Electronics","Mystery Boxes"];
+let active="All";
 let basket=[];
 
 function drawChips(){
-document.getElementById('chips').innerHTML=cats.map(c=>
-`<button class="chip ${active===c?'active':''}" onclick="setCategory('${c}')">${c.toUpperCase()}</button>`
-).join('');
+ document.getElementById("chips").innerHTML=cats.map(c=>
+ `<button class="chip ${active===c?"active":""}" onclick="setCategory('${c}')">${c.toUpperCase()}</button>`
+ ).join("");
 }
 
 function setCategory(c){
-active=c;
-drawChips();
-render();
+ active=c;
+ drawChips();
+ render();
 }
 
 function render(){
-let q=document.getElementById('q').value.toLowerCase();
-let list=products.filter(p=>
-(active==='All'||p.c===active)&&p.t.toLowerCase().includes(q)
-);
+ const q=document.getElementById("q").value.toLowerCase();
+ let list=products.filter(p=>
+ (active==="All"||p.cat===active)&&p.name.toLowerCase().includes(q)
+ );
 
-let sort=document.getElementById('sort').value;
-if(sort==='az')list.sort((a,b)=>a.t.localeCompare(b.t));
-if(sort==='za')list.sort((a,b)=>b.t.localeCompare(a.t));
+ const sort=document.getElementById("sort").value;
+ if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
+ if(sort==="za")list.sort((a,b)=>b.name.localeCompare(a.name));
 
-document.getElementById('count').textContent=list.length+' PRODUCTS';
+ document.getElementById("count").textContent=list.length+" PRODUCTS";
 
-document.getElementById('grid').innerHTML=list.map(p=>`
-<article class="card">
-<div class="photo">
-<img src="./assets/product-${p.n}.jpg" alt="${p.t}" loading="lazy">
-</div>
-<h3>${p.t}</h3>
-<div class="meta">${p.c}</div>
-<div class="price">Price on request</div>
-<button onclick="add(${p.n})">ADD TO BAG</button>
-</article>
-`).join('')||'<div class="empty">No products found.</div>';
+ document.getElementById("grid").innerHTML=list.map(p=>`
+ <article class="card">
+  <div class="photo">
+   <img src="./${p.file}" alt="${p.name}" loading="lazy">
+  </div>
+  <h3>${p.name}</h3>
+  <div class="meta">${p.cat}</div>
+  <div class="price">Price on request</div>
+  <button onclick="add('${p.file}')">ADD TO BAG</button>
+ </article>
+ `).join("")||'<div class="empty">No products found.</div>';
 }
 
-function add(n){
-basket.push(n);
-document.getElementById('qty').textContent=basket.length;
+function add(file){
+ basket.push(file);
+ document.getElementById("qty").textContent=basket.length;
 }
 
 function showBag(){
-document.getElementById('bag').style.display='block';
-document.getElementById('bagitems').innerHTML=basket.map(n=>{
-let p=products.find(x=>x.n===n);
-return `<div class="bagitem">${p.t} — Price on request</div>`;
-}).join('')||'<p>Your bag is empty.</p>';
+ document.getElementById("bag").style.display="block";
+ document.getElementById("bagitems").innerHTML=basket.map(file=>{
+  const p=products.find(x=>x.file===file);
+  return `<div class="bagitem">${p.name} — Price on request</div>`;
+ }).join("")||"<p>Your bag is empty.</p>";
 }
 
 function hideBag(){
-document.getElementById('bag').style.display='none';
+ document.getElementById("bag").style.display="none";
 }
 
 drawChips();
