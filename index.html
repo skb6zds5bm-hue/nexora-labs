@@ -1,182 +1,259 @@
-
-<!DOCTYPE html>
+<!doctype html>
 <html lang="et">
 <head>
-<meta charset="UTF-8">
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>NEXORA | Fashion Store</title>
+<title>NEXORA — Streetwear & More</title>
 <style>
+:root{--ink:#111;--muted:#777;--line:#e8e8e8;--paper:#fff}
 *{box-sizing:border-box}
-body{margin:0;font-family:Arial,sans-serif;color:#111}
-.top{background:#111;color:white;text-align:center;padding:12px;font-size:11px;letter-spacing:2px}
-header{height:75px;display:flex;align-items:center;justify-content:space-between;padding:0 5%;border-bottom:1px solid #eee;position:sticky;top:0;background:white;z-index:5}
-.logo{font-size:25px;font-weight:900;letter-spacing:5px}
+body{margin:0;color:var(--ink);font-family:Arial,Helvetica,sans-serif;background:var(--paper)}
+.top{background:#111;color:#fff;text-align:center;padding:10px 12px;font-size:10px;letter-spacing:2px}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;padding:16px 5%;z-index:3}
+.logo{font-size:24px;font-weight:900;letter-spacing:5px}
+.nav{font-size:11px;letter-spacing:1px;color:#555}
 button,select,input{font:inherit}
-header button{background:none;border:0;font-size:16px}
-.hero{margin:25px auto;width:92%;background:#222;color:white;padding:55px 7%;min-height:300px}
-.hero small{letter-spacing:4px}
-.hero h1{font-size:clamp(40px,8vw,70px);max-width:650px;margin:22px 0}
-.hero p{line-height:1.6}
-.hero a{display:inline-block;background:white;color:#111;padding:16px 25px;border-radius:30px;text-decoration:none;font-weight:bold}
-.wrap{width:92%;max-width:1400px;margin:45px auto}
-h2{font-size:30px}
-.categories{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.cat{background:#f4f4f4;padding:30px 8px;text-align:center;font-weight:bold;cursor:pointer}
-.filters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
-.filters input{grid-column:1/-1}
-.filters input,.filters select{width:100%;padding:14px;border:1px solid #ddd;border-radius:25px;background:white}
-.products{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px 12px}
-.product img{width:100%;aspect-ratio:1/1.15;object-fit:contain;background:#f6f6f6}
-.product h3{font-size:15px;font-weight:500;line-height:1.5;margin:10px 0}
-.price{font-weight:bold}
-.old{color:#888;text-decoration:line-through;margin-left:6px;font-weight:normal}
-.product select{width:100%;padding:10px;margin-top:8px;border:1px solid #ddd}
-.add{width:100%;padding:13px;margin-top:8px;background:#111;color:white;border:0}
-.boxes{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
-.mystery{background:#111;color:white;padding:22px}
-.mystery h3{font-size:20px}
-footer{background:#111;color:white;padding:40px 6%;margin-top:60px;line-height:1.8}
-#bag{position:fixed;bottom:15px;right:15px;border:0;border-radius:30px;background:#111;color:white;padding:15px 22px}
-@media(min-width:750px){.products{grid-template-columns:repeat(4,1fr)}.categories{grid-template-columns:repeat(4,1fr)}.boxes{grid-template-columns:repeat(4,1fr)}}
+button{cursor:pointer}
+.bagbtn{border:1px solid #111;background:#111;color:white;padding:11px 15px;font-size:11px;letter-spacing:1px}
+.hero{margin:24px auto 0;width:90%;max-width:1400px;min-height:300px;background:#171717;color:white;padding:50px 6%;display:flex;flex-direction:column;justify-content:center}
+.hero small{letter-spacing:3px;color:#bbb}
+.hero h1{font-size:clamp(38px,8vw,76px);line-height:.98;max-width:750px;margin:18px 0}
+.hero p{color:#ccc;max-width:500px;line-height:1.6}
+.wrap{width:90%;max-width:1400px;margin:42px auto}
+.sectionhead{display:flex;justify-content:space-between;align-items:end;gap:20px}
+.sectionhead h2{font-size:26px;margin:0}
+.sectionhead p{font-size:12px;color:var(--muted)}
+.filters{display:flex;gap:9px;margin:22px 0;flex-wrap:wrap}
+.filters input,.filters select{border:1px solid #ddd;background:#fff;padding:13px;min-width:145px;flex:1}
+.filters input{flex:2}
+.categories{display:flex;gap:8px;flex-wrap:wrap;margin:18px 0}
+.chip{padding:9px 13px;border:1px solid #ddd;background:white;font-size:11px;letter-spacing:.5px}
+.chip.active{background:#111;color:#fff;border-color:#111}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:24px 15px}
+.card{min-width:0}
+.photo{position:relative;background:#f6f6f4;overflow:hidden}
+.photo img{display:block;width:100%;aspect-ratio:4/5;object-fit:contain;mix-blend-mode:multiply}
+.tag{position:absolute;top:10px;left:10px;background:#111;color:white;padding:6px 8px;font-size:9px;letter-spacing:1px}
+.card h3{font-size:13px;line-height:1.4;margin:11px 0 5px}
+.meta{font-size:10px;color:#777;letter-spacing:1px;text-transform:uppercase}
+.price{font-weight:bold;font-size:13px;margin-top:8px}
+.ref{font-size:10px;color:#888;margin-top:5px}
+.card button{width:100%;margin-top:10px;padding:11px;background:#111;color:white;border:0;font-size:10px;letter-spacing:1px}
+.notice{font-size:11px;color:#777;line-height:1.7}
+.empty{padding:40px 0;color:#777;text-align:center}
+footer{margin-top:60px;background:#111;color:#fff;padding:38px 5%}
+.footlogo{font-size:24px;font-weight:900;letter-spacing:5px}
+footer p{max-width:850px;color:#aaa;font-size:11px;line-height:1.8}
+#bag{display:none;position:fixed;inset:0 0 0 auto;width:min(390px,100%);background:white;z-index:9;box-shadow:0 0 0 100vmax #0008;padding:22px;overflow:auto}
+.baghead{display:flex;justify-content:space-between;align-items:center}
+.baghead button{background:none;border:0;font-size:12px}
+.bagitem{padding:14px 0;border-bottom:1px solid #eee;font-size:12px}
+.total{font-weight:bold;margin:22px 0}
+@media(max-width:900px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:620px){
+header{padding:14px 5%}
+.nav{display:none}
+.logo{font-size:20px}
+.hero{min-height:260px;padding:35px 7%}
+.wrap{width:92%;margin:32px auto}
+.grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 10px}
+.sectionhead p{display:none}
+.filters input{flex-basis:100%}
+}
 </style>
 </head>
 <body>
-<div class="top">NEW ARRIVALS · STREETWEAR · SNEAKERS · ACCESSORIES · FRAGRANCES</div>
+
+<div class="top">NEXORA · STREETWEAR · FOOTWEAR · ACCESSORIES · FRAGRANCE</div>
+
 <header>
-<button onclick="document.getElementById('collections').scrollIntoView()">☰</button>
+<span class="nav">NEW SEASON / CURATED EDIT</span>
 <div class="logo">NEXORA</div>
-<button onclick="showBag()">BAG (<span id="count">0</span>)</button>
+<button class="bagbtn" onclick="showBag()">BAG (<span id="qty">0</span>)</button>
 </header>
 
 <section class="hero">
-<small>THE NEW SEASON EDIT</small>
-<h1>FIND YOUR EVERYDAY STYLE.</h1>
-<p>Discover clothing, footwear, accessories and fragrances.</p>
-<a href="#catalogue">SHOP COLLECTION →</a>
+<small>THE NEXORA EDIT</small>
+<h1>YOUR STYLE.<br>YOUR SEASON.</h1>
+<p>Explore the collection by category. Product images are shown for catalogue reference only.</p>
 </section>
 
 <main class="wrap">
-<h2 id="collections">Shop by collection</h2>
-<div class="categories">
-<div class="cat" onclick="filterCategory('Clothing')">Clothing</div>
-<div class="cat" onclick="filterCategory('Footwear')">Footwear</div>
-<div class="cat" onclick="filterCategory('Accessories')">Accessories</div>
-<div class="cat" onclick="filterCategory('Fragrances')">Fragrances</div>
+<div class="sectionhead">
+<h2>Shop collection</h2>
+<p id="count"></p>
 </div>
 
-<h2 id="catalogue">All products</h2>
+<div class="categories" id="chips"></div>
+
 <div class="filters">
-<input id="search" placeholder="Search products..." oninput="render()">
-<select id="category" onchange="render()">
-<option value="All">All categories</option>
-<option>Clothing</option>
-<option>Footwear</option>
-<option>Accessories</option>
-<option>Fragrances</option>
-</select>
-<select id="sorting" onchange="render()">
+<input id="q" placeholder="Search products..." oninput="render()">
+<select id="sort" onchange="render()">
 <option value="featured">Featured</option>
 <option value="low">Price: low to high</option>
 <option value="high">Price: high to low</option>
 </select>
 </div>
-<div class="products" id="products"></div>
 
-<h2>Mystery Boxes</h2>
-<div class="boxes">
-<div class="mystery"><h3>Starter Box</h3><p>1 random fashion item</p><b>€19.99</b></div>
-<div class="mystery"><h3>Triple Sweater Box</h3><p>3 random sweaters</p><b>€49.99</b></div>
-<div class="mystery"><h3>Premium Box</h3><p>5 random fashion items</p><b>€79.99</b></div>
-<div class="mystery"><h3>Ultimate Box</h3><p>8 random fashion items</p><b>€119.99</b></div>
-</div>
-<p style="font-size:12px;color:#777;line-height:1.6;margin-top:35px">
-Toodete saadavus, autentsus, müüja andmed, tarne- ja tagastustingimused ning maksevõimalused tuleb enne tellimuste avamist kinnitada. See kataloog ei töötle päris makseid.
-</p>
+<div class="grid" id="grid"></div>
 </main>
 
+<aside id="bag">
+<div class="baghead">
+<h2>Your bag</h2>
+<button onclick="hideBag()">CLOSE ✕</button>
+</div>
+<div id="bagitems"></div>
+<div class="total" id="sum">Total —</div>
+<p class="notice">Demo catalogue only. This page does not accept orders or payments. Product authenticity, affiliation, availability and final prices are not verified.</p>
+</aside>
+
 <footer>
-<div class="logo">NEXORA</div>
-<p>Streetwear · Footwear · Accessories · Fragrances</p>
-<p>Contact: lisa siia oma e-posti aadress</p>
+<div class="footlogo">NEXORA</div>
+<p>Independent catalogue concept. Brand names and product images, where shown, are used only to identify the pictured reference items. NEXORA is not affiliated with or endorsed by the brands shown. No checkout or payment is enabled. Only list products for sale when you have the right to sell them and can accurately verify their authenticity.</p>
 </footer>
-<button id="bag" onclick="showBag()">BAG (<span id="count2">0</span>)</button>
 
 <script>
-/* Sinu GitHubi pildifailid: IMG_3646.webp kuni IMG_3752.webp.
-   Puuduvad failinumbrid jäetakse automaatselt vahele. */
-const imageFiles=[];
-for(let n=3646;n<=3752;n++) imageFiles.push("IMG_"+n+".webp");
+const products = [
+{img:1,cat:'Clothing',name:'Stone Island Zip Hoodie'},
+{img:2,cat:'Clothing',name:'Stüssy Pullover Hoodie'},
+{img:3,cat:'Clothing',name:'Stüssy Graphic T-Shirt'},
+{img:4,cat:'Clothing',name:'Stüssy Zip Hoodie — Grey'},
+{img:5,cat:'Clothing',name:'Stone Island Jacket'},
+{img:6,cat:'Clothing',name:'Stone Island Sweatshirt'},
+{img:7,cat:'Clothing',name:'Stone Island Sweatpants'},
+{img:8,cat:'Clothing',name:'Stüssy T-Shirt — Black'},
+{img:9,cat:'Clothing',name:'Mystery Clothing Box',tag:'MYSTERY BOX'},
+{img:10,cat:'Clothing',name:'Supreme Box Logo Hoodie'},
+{img:11,cat:'Clothing',name:'Graphic Hoodie'},
+{img:12,cat:'Clothing',name:'Stone Island Shorts — White'},
+{img:13,cat:'Clothing',name:'Polo Ralph Lauren Jacket'},
+{img:14,cat:'Clothing',name:'Shorts — White'},
+{img:15,cat:'Clothing',name:'Track Pants — Navy'},
+{img:16,cat:'Clothing',name:'Basic T-Shirt — White'},
+{img:17,cat:'Clothing',name:'Graphic Sweatshirt'},
+{img:18,cat:'Clothing',name:'Denim Jeans'},
+{img:19,cat:'Clothing',name:'Polo Shirt'},
+{img:20,cat:'Clothing',name:'Mystery Clothing Box',tag:'MYSTERY BOX'},
+{img:21,cat:'Clothing',name:'Graphic Shorts'},
+{img:22,cat:'Clothing',name:'Shorts — Black'},
+{img:23,cat:'Clothing',name:'Graphic T-Shirt'},
+{img:24,cat:'Clothing',name:'Graphic Hoodie'},
+{img:25,cat:'Clothing',name:'Arc’teryx Jacket'},
+{img:26,cat:'Clothing',name:'Balenciaga Hoodie'},
+{img:27,cat:'Clothing',name:'Balenciaga Zip Hoodie'},
+{img:28,cat:'Clothing',name:'Chrome Hearts Long Sleeve'},
+{img:29,cat:'Clothing',name:'Vintage Mystery Box',tag:'MYSTERY BOX'},
+{img:30,cat:'Clothing',name:'AMI Paris Sweatshirt'},
+{img:31,cat:'Clothing',name:'Balenciaga Jacket'},
+{img:32,cat:'Clothing',name:'Balenciaga Sweatshirt'},
+{img:33,cat:'Clothing',name:'Essentials Shorts'},
+{img:34,cat:'Clothing',name:'Essentials Hoodie'},
+{img:35,cat:'Clothing',name:'BAPE Hoodie'},
+{img:36,cat:'Clothing',name:'BAPE T-Shirt'},
 
-const categories=["Clothing","Footwear","Accessories","Fragrances"];
-const prices=[13.99,16.99,18.99,19.99,22.99,24.99,29.99,34.99];
-let items=[];
-let bag=[];
+{img:37,cat:'Footwear',name:'Black Runner Sneakers'},
+{img:38,cat:'Footwear',name:'Black Low-Top Sneakers'},
+{img:39,cat:'Footwear',name:'Maison Margiela Replica Sneakers'},
+{img:40,cat:'Footwear',name:'Black Low-Top Sneakers'},
+{img:41,cat:'Footwear',name:'Jordan 4 Sneakers'},
+{img:42,cat:'Footwear',name:'Yeezy Slides — Beige'},
+{img:43,cat:'Footwear',name:'Birkenstock Sandals'},
+{img:44,cat:'Footwear',name:'Nike Air Max 95 Corteiz'},
+{img:45,cat:'Footwear',name:'Black Runner Sneakers'},
+{img:46,cat:'Footwear',name:'Black Low-Top Sneakers'},
+{img:47,cat:'Footwear',name:'Maison Margiela Replica Sneakers'},
+{img:48,cat:'Footwear',name:'Black Low-Top Sneakers'},
+{img:49,cat:'Footwear',name:'Birkenstock Sandals'},
+{img:50,cat:'Footwear',name:'Nike Air Max 95 Corteiz'},
+{img:51,cat:'Footwear',name:'Louis Vuitton Skate Sneakers'},
 
-imageFiles.forEach((file,i)=>{
- items.push({
-  id:i,
-  file:file,
-  name:"Fashion item "+(i+1),
-  category:categories[i<35?0:i<50?1:i<75?2:3],
-  price:prices[i%prices.length],
-  old:prices[i%prices.length]*1.7
- });
-});
+{img:53,cat:'Accessories',name:'Rolex Watch'},
+{img:54,cat:'Accessories',name:'Audemars Piguet Watch'},
+{img:55,cat:'Accessories',name:'Designer Belt Set'},
+{img:56,cat:'Accessories',name:'Goyard Wallet'},
 
-function filterCategory(c){
- document.getElementById("category").value=c;
- render();
- document.getElementById("catalogue").scrollIntoView();
+{img:57,cat:'Fragrances',name:'Emporio Armani Stronger With You Intensely'},
+{img:58,cat:'Fragrances',name:'Valentino Fragrance'},
+{img:59,cat:'Fragrances',name:'Fragrance Discovery Box',tag:'GIFT SET'},
+{img:60,cat:'Fragrances',name:'Jean Paul Gaultier Le Male'},
+{img:61,cat:'Fragrances',name:'Louis Vuitton Imagination'},
+{img:62,cat:'Fragrances',name:'Bleu de Chanel'},
+{img:63,cat:'Fragrances',name:'Creed Aventus'},
+{img:64,cat:'Fragrances',name:'Parfums de Marly'},
+{img:65,cat:'Fragrances',name:'Tom Ford Lost Cherry'},
+{img:66,cat:'Fragrances',name:'Xerjoff Erba Pura'},
+{img:67,cat:'Fragrances',name:'Yves Saint Laurent Fragrance'}
+];
+
+const categories=['All','Clothing','Footwear','Accessories','Fragrances'];
+let active='All';
+let basket=[];
+
+function drawChips(){
+document.getElementById('chips').innerHTML=categories.map(c=>
+`<button class="chip ${active===c?'active':''}" onclick="setCategory('${c}')">${c==='All'?'ALL':c.toUpperCase()}</button>`
+).join('');
+}
+
+function setCategory(c){
+active=c;
+drawChips();
+render();
 }
 
 function render(){
- const query=document.getElementById("search").value.toLowerCase();
- const cat=document.getElementById("category").value;
- let list=items.filter(p=>
-  (cat==="All"||p.category===cat)&&
-  p.name.toLowerCase().includes(query)
- );
- const sort=document.getElementById("sorting").value;
- if(sort==="low")list.sort((a,b)=>a.price-b.price);
- if(sort==="high")list.sort((a,b)=>b.price-a.price);
+const q=document.getElementById('q').value.trim().toLowerCase();
 
- document.getElementById("products").innerHTML=list.map(p=>`
- <article class="product" id="item${p.id}">
- <img src="./${p.file}" alt="Uploaded product" loading="lazy"
- onerror="this.closest('.product').remove()">
- <h3>${p.name}</h3>
- <div class="price">€${p.price.toFixed(2)}
- <span class="old">€${p.old.toFixed(2)}</span></div>
- <select id="size${p.id}">
- <option value="">Choose size</option>
- <option>XS</option><option>S</option><option>M</option>
- <option>L</option><option>XL</option><option>XXL</option>
- <option>One size</option>
- </select>
- <select id="color${p.id}">
- <option>Black</option><option>White</option><option>Grey</option>
- <option>Navy</option><option>Brown</option><option>Beige</option>
- </select>
- <button class="add" onclick="addToBag(${p.id})">ADD TO BAG</button>
- </article>`).join("");
+let list=products.filter(p=>
+(active==='All'||p.cat===active)&&p.name.toLowerCase().includes(q)
+);
+
+const s=document.getElementById('sort').value;
+
+if(s==='low')list.sort((a,b)=>(a.price??Infinity)-(b.price??Infinity));
+if(s==='high')list.sort((a,b)=>(b.price??-Infinity)-(a.price??-Infinity));
+
+document.getElementById('count').textContent=list.length+' ITEMS';
+
+document.getElementById('grid').innerHTML=list.length?
+list.map(p=>`
+<article class="card">
+<div class="photo">
+<img src="assets/product-${String(p.img).padStart(2,'0')}.jpg" alt="${p.name}" loading="lazy">
+${p.tag?`<span class="tag">${p.tag}</span>`:''}
+</div>
+<h3>${p.name}</h3>
+<div class="meta">${p.cat}</div>
+<div class="price">Price on request</div>
+<div class="ref">Catalogue reference</div>
+<button onclick="add(${p.img})">ADD TO BAG</button>
+</article>
+`).join('')
+:'<div class="empty">No products found.</div>';
 }
 
-function addToBag(id){
- const p=items[id];
- const size=document.getElementById("size"+id).value;
- const color=document.getElementById("color"+id).value;
- if(!size){alert("Choose a size first");return}
- bag.push({name:p.name,price:p.price,size:size,color:color});
- document.getElementById("count").textContent=bag.length;
- document.getElementById("count2").textContent=bag.length;
- alert("Added to demo bag");
+function add(id){
+basket.push(id);
+document.getElementById('qty').textContent=basket.length;
 }
 
 function showBag(){
- if(!bag.length){alert("Your bag is empty");return}
- let total=bag.reduce((s,p)=>s+p.price,0);
- alert("DEMO BAG\n"+bag.map(p=>p.name+" / "+p.size+" / "+p.color+" / €"+p.price.toFixed(2)).join("\n")+"\nTotal: €"+total.toFixed(2)+"\nDemo only — payment is not active.");
+document.getElementById('bag').style.display='block';
+
+document.getElementById('bagitems').innerHTML=basket.map(id=>{
+const p=products.find(x=>x.img===id);
+return `<div class="bagitem">${p.name} — Price on request</div>`;
+}).join('')||'<p>Your bag is empty.</p>';
+
+document.getElementById('sum').textContent='Total: price on request';
 }
+
+function hideBag(){
+document.getElementById('bag').style.display='none';
+}
+
+drawChips();
 render();
 </script>
 </body>
