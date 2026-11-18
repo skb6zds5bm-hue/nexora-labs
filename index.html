@@ -8,39 +8,65 @@
 <style>
 *{box-sizing:border-box}
 body{margin:0;background:#fff;color:#111;font-family:Arial,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer}
 .top{background:#111;color:#fff;text-align:center;padding:11px;font-size:10px;letter-spacing:2px}
-header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:17px 5%;display:flex;justify-content:space-between;align-items:center;z-index:5}
+header{position:sticky;top:0;background:#fff;border-bottom:1px solid #eee;padding:16px 5%;display:flex;justify-content:space-between;align-items:center;z-index:20}
 .logo{font-size:25px;font-weight:900;letter-spacing:5px}
-button{cursor:pointer;font-family:inherit}
-.bagbtn{background:#111;color:#fff;border:0;padding:12px 16px;font-size:11px}
+.header-link{border:0;background:white;font-size:10px;letter-spacing:1px}
+.bagbtn{background:#111;color:#fff;border:0;padding:13px 18px;font-size:11px}
 .hero{margin:25px auto;width:90%;background:#171717;color:#fff;padding:55px 6%}
 .hero small{letter-spacing:3px;color:#aaa}
 .hero h1{font-size:clamp(38px,8vw,75px);margin:18px 0}
 .hero p{color:#ccc;font-size:13px}
 .wrap{width:90%;max-width:1400px;margin:40px auto}
-.categories{display:flex;gap:8px;flex-wrap:wrap;margin:20px 0}
-.chip{border:1px solid #ddd;background:#fff;padding:11px 15px;font-size:10px;letter-spacing:1px}
+.categories{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:9px;margin:20px 0}
+.chip{min-height:58px;border:1px solid #ddd;background:#fff;padding:9px 4px;font-size:10px;letter-spacing:1px}
 .chip.active{background:#111;color:#fff;border-color:#111}
 .filters{display:flex;gap:10px;margin:20px 0}
-input,select{padding:13px;border:1px solid #ddd;background:#fff;min-width:0}
-input{flex:2}
+.filters input{flex:2}
 .filters select{flex:1}
+input,select{padding:14px;border:1px solid #ddd;background:#fff;min-width:0}
 .grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:25px 15px}
-.card{min-width:0}
+.card{min-width:0;cursor:pointer}
 .photo{background:#f7f7f7}
 .photo img{width:100%;aspect-ratio:4/5;object-fit:contain;display:block}
 .card h3{font-size:13px;line-height:1.4;margin:10px 0 5px}
 .meta{font-size:10px;color:#888;text-transform:uppercase;letter-spacing:1px}
-.price{font-size:13px;font-weight:bold;margin-top:9px}
-.card button{width:100%;background:#111;color:#fff;border:0;padding:12px;margin-top:10px;font-size:10px;letter-spacing:1px}
+.price{font-size:14px;font-weight:bold;margin-top:9px}
+.card button{width:100%;background:#111;color:#fff;border:0;padding:13px;margin-top:10px;font-size:10px;letter-spacing:1px}
 #count{font-size:11px;color:#777}
 .empty{text-align:center;padding:50px;color:#777}
 footer{background:#111;color:#fff;padding:40px 5%;margin-top:60px}
 footer p{color:#aaa;font-size:11px;line-height:1.8}
-#bag{display:none;position:fixed;z-index:10;right:0;top:0;height:100%;width:min(390px,100%);background:#fff;box-shadow:0 0 0 100vmax #0008;padding:22px;overflow:auto}
-.baghead{display:flex;justify-content:space-between;align-items:center}
-.baghead button{border:0;background:#fff}
-.bagitem{padding:13px 0;border-bottom:1px solid #eee;font-size:12px}
+.panel{display:none;position:fixed;inset:0;background:#fff;z-index:50;overflow:auto;padding:15px 5% 45px}
+.panel.open{display:block}
+.panel-head{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #eee;padding:12px 0 18px}
+.panel-head button{border:0;background:white;padding:10px}
+.content{max-width:760px;margin:20px auto}
+.detail-image{width:100%;max-height:480px;object-fit:contain;background:#f7f7f7;display:block}
+.detail-name{font-size:clamp(25px,6vw,38px);font-weight:900;margin:22px 0 8px}
+.detail-price{font-size:28px;font-weight:900;margin:12px 0}
+.label{font-weight:bold;margin:25px 0 10px}
+.options{display:flex;gap:9px;flex-wrap:wrap}
+.option{min-width:58px;padding:13px 16px;border:1px solid #ddd;background:#fff;font-weight:bold}
+.option.selected{background:#111;color:#fff;border-color:#111}
+.primary{width:100%;padding:18px;background:#111;color:#fff;border:0;font-weight:bold;margin-top:28px}
+.secondary{width:100%;padding:16px;background:#fff;border:1px solid #111;margin-top:10px}
+.bag-list{max-width:760px;margin:20px auto}
+.bag-item{display:grid;grid-template-columns:75px 1fr;gap:15px;padding:15px 0;border-bottom:1px solid #eee}
+.bag-item img{width:75px;height:90px;object-fit:contain;background:#f7f7f7}
+.bag-item h3{font-size:13px;margin:0 0 7px}
+.bag-item small{color:#777}
+.bag-actions{display:flex;gap:8px;align-items:center;margin-top:9px;flex-wrap:wrap}
+.bag-actions button{background:white;border:1px solid #ddd;padding:7px 12px}
+.bag-total{border-top:1px solid #ddd;margin-top:20px;padding-top:15px;font-size:18px;font-weight:bold}
+.form-field{display:block;width:100%;margin:13px 0}
+.form-field label{display:block;font-size:12px;font-weight:bold;margin-bottom:6px}
+.form-field input{width:100%}
+.notice{background:#f6f6f6;padding:15px;font-size:12px;line-height:1.6;color:#555;margin:15px 0}
+.page-title{font-size:30px;font-weight:900}
+.link-button{border:0;background:white;text-decoration:underline;padding:10px 0}
 @media(max-width:850px){.grid{grid-template-columns:repeat(3,minmax(0,1fr))}}
 @media(max-width:600px){
  .grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 10px}
@@ -49,6 +75,9 @@ footer p{color:#aaa;font-size:11px;line-height:1.8}
  .filters input{flex-basis:100%}
  .filters select{flex:1}
  .wrap{width:92%}
+ .categories{grid-template-columns:repeat(3,minmax(0,1fr))}
+ .chip{font-size:9px;min-height:53px}
+ .logo{font-size:21px;letter-spacing:3px}
 }
 </style>
 </head>
@@ -57,51 +86,136 @@ footer p{color:#aaa;font-size:11px;line-height:1.8}
 <div class="top">NEXORA · STREETWEAR · FOOTWEAR · ACCESSORIES · FRAGRANCE</div>
 
 <header>
-<span style="font-size:10px;letter-spacing:1px">THE COLLECTION</span>
+<button class="header-link" onclick="goHome()">THE COLLECTION</button>
 <div class="logo">NEXORA</div>
-<button class="bagbtn" onclick="showBag()">BAG (<span id="qty">0</span>)</button>
+<button class="bagbtn" onclick="openBag()">BAG (<span id="qty">0</span>)</button>
 </header>
 
-<section class="hero">
+<section class="hero" id="hero">
 <small>THE NEXORA EDIT</small>
 <h1>FIND YOUR<br>EVERYDAY STYLE.</h1>
 <p>Explore the collection.</p>
 </section>
 
-<main class="wrap">
+<main class="wrap" id="collection">
 <h2>Shop collection</h2>
 <div id="count"></div>
 <div class="categories" id="chips"></div>
-
 <div class="filters">
 <input id="q" placeholder="Search products..." oninput="render()">
 <select id="sort" onchange="render()">
 <option value="default">Featured</option>
 <option value="az">Name: A–Z</option>
 <option value="za">Name: Z–A</option>
+<option value="low">Price: Low to high</option>
+<option value="high">Price: High to low</option>
 </select>
 </div>
-
 <div class="grid" id="grid"></div>
 </main>
-
-<aside id="bag">
-<div class="baghead">
-<h2>Your bag</h2>
-<button onclick="hideBag()">CLOSE ✕</button>
-</div>
-<div id="bagitems"></div>
-<p class="price">Price on request</p>
-<p style="font-size:11px;color:#777;line-height:1.6">Catalogue demonstration only. No orders or payments are accepted.</p>
-</aside>
 
 <footer>
 <div class="logo">NEXORA</div>
 <p>Independent catalogue concept. Brand names and product images identify the pictured reference items. NEXORA is not affiliated with or endorsed by the brands shown. Product authenticity and availability are not verified.</p>
+<p>Catalogue demonstration. No real payments are currently processed.</p>
 </footer>
 
+<section class="panel" id="detail">
+<div class="panel-head">
+<strong class="logo">NEXORA</strong>
+<button onclick="closePanel('detail')">CLOSE ✕</button>
+</div>
+<div class="content">
+<img class="detail-image" id="detailImage" alt="">
+<div class="meta" id="detailCat"></div>
+<div class="detail-name" id="detailName"></div>
+<div class="detail-price" id="detailPrice"></div>
+
+<div class="label">Color</div>
+<div class="options" id="colors"></div>
+
+<div class="label">Size</div>
+<div class="options" id="sizes"></div>
+
+<div class="label">Quantity</div>
+<div class="options" id="quantities"></div>
+
+<button class="primary" onclick="addToBag()">ADD TO BAG</button>
+<button class="secondary" onclick="closePanel('detail')">BACK TO COLLECTION</button>
+</div>
+</section>
+
+<section class="panel" id="bag">
+<div class="panel-head">
+<strong class="logo">NEXORA</strong>
+<button onclick="closePanel('bag')">CLOSE ✕</button>
+</div>
+<div class="content">
+<h1 class="page-title">Your bag</h1>
+<div id="bagItems" class="bag-list"></div>
+<div class="bag-total" id="bagTotal"></div>
+<div class="notice">Demonstration checkout only. No real payments are processed.</div>
+<button class="primary" onclick="openCheckout()">CONTINUE TO CHECKOUT</button>
+<button class="secondary" onclick="goHome()">CONTINUE SHOPPING</button>
+</div>
+</section>
+
+<section class="panel" id="checkout">
+<div class="panel-head">
+<strong class="logo">NEXORA</strong>
+<button onclick="closePanel('checkout')">CLOSE ✕</button>
+</div>
+<div class="content">
+<h1 class="page-title">Checkout</h1>
+<p>Contact and delivery details</p>
+<div id="checkoutSummary" class="notice"></div>
+<form id="checkoutForm">
+<div class="form-field">
+<label for="customerName">Full name</label>
+<input id="customerName" required autocomplete="name" placeholder="Your full name">
+</div>
+<div class="form-field">
+<label for="customerEmail">Email</label>
+<input id="customerEmail" type="email" required autocomplete="email" placeholder="you@example.com">
+</div>
+<div class="form-field">
+<label for="customerPhone">Phone number</label>
+<input id="customerPhone" type="tel" autocomplete="tel" placeholder="+372">
+</div>
+<div class="form-field">
+<label for="customerAddress">Delivery address</label>
+<input id="customerAddress" required autocomplete="street-address" placeholder="Street and house number">
+</div>
+<div class="form-field">
+<label for="customerCity">City</label>
+<input id="customerCity" required autocomplete="address-level2" placeholder="City">
+</div>
+<div class="form-field">
+<label for="customerPostcode">Postal code</label>
+<input id="customerPostcode" required autocomplete="postal-code" placeholder="Postal code">
+</div>
+<div class="notice">DEMO CHECKOUT: This is a demonstration only. It does not send your details, accept payment, or create a real order.</div>
+<button class="primary" type="submit">PLACE DEMO ORDER</button>
+</form>
+<button class="secondary" onclick="openBag()">BACK TO BAG</button>
+</div>
+</section>
+
+<section class="panel" id="confirmation">
+<div class="panel-head">
+<strong class="logo">NEXORA</strong>
+<button onclick="goHome()">CLOSE ✕</button>
+</div>
+<div class="content">
+<h1 class="page-title">Thank you!</h1>
+<p>Your demo checkout is complete.</p>
+<div class="notice">This was a demonstration only. No real order was placed and no payment was taken.</div>
+<button class="primary" onclick="goHome()">BACK TO COLLECTION</button>
+</div>
+</section>
+
 <script>
-const products = [
+const products=[
 {file:"IMG_3646.webp",name:"Essentials Shorts — Grey",cat:"Clothing"},
 {file:"IMG_3647.webp",name:"Essentials Hoodie — Grey",cat:"Clothing"},
 {file:"IMG_3648.webp",name:"BAPE Shark Zip Hoodie",cat:"Clothing"},
@@ -110,7 +224,6 @@ const products = [
 {file:"IMG_3651.webp",name:"Polo Ralph Lauren Zip Hoodie",cat:"Clothing"},
 {file:"IMG_3652.webp",name:"Polo Ralph Lauren Sweater Bundle",cat:"Mystery Boxes"},
 {file:"IMG_3653.webp",name:"AMI Paris Sweater",cat:"Clothing"},
-
 {file:"IMG_3675.webp",name:"AirPods Pro",cat:"Electronics"},
 {file:"IMG_3676.webp",name:"AirPods Max",cat:"Electronics"},
 {file:"IMG_3678.webp",name:"Apple Watch",cat:"Electronics"},
@@ -118,7 +231,6 @@ const products = [
 {file:"IMG_3680.webp",name:"Audemars Piguet Watch",cat:"Accessories"},
 {file:"IMG_3681.webp",name:"Balenciaga Hoodie",cat:"Clothing"},
 {file:"IMG_3682.webp",name:"Yeezy Gap Hoodie",cat:"Clothing"},
-
 {file:"IMG_3685.webp",name:"Designer Belt Bundle",cat:"Accessories"},
 {file:"IMG_3686.webp",name:"Birkenstock Boston Clog",cat:"Footwear"},
 {file:"IMG_3687.webp",name:"Bleu de Chanel",cat:"Fragrances"},
@@ -128,7 +240,6 @@ const products = [
 {file:"IMG_3691.webp",name:"Washed Grey Jeans",cat:"Clothing"},
 {file:"IMG_3692.webp",name:"Black Technical Sneakers",cat:"Footwear"},
 {file:"IMG_3693.webp",name:"Dyson Airwrap",cat:"Electronics"},
-
 {file:"IMG_3696.webp",name:"Essentials Sweatpants",cat:"Clothing"},
 {file:"IMG_3697.webp",name:"Evisu Jeans",cat:"Clothing"},
 {file:"IMG_3698.webp",name:"Goyard Cardholder",cat:"Accessories"},
@@ -138,7 +249,6 @@ const products = [
 {file:"IMG_3702.webp",name:"Jordan 4 Sneakers",cat:"Footwear"},
 {file:"IMG_3703.webp",name:"Lacoste Clothing Bundle",cat:"Mystery Boxes"},
 {file:"IMG_3704.webp",name:"Black Low-Top Sneakers",cat:"Footwear"},
-
 {file:"IMG_3705.webp",name:"Louis Vuitton Belt",cat:"Accessories"},
 {file:"IMG_3706.webp",name:"Louis Vuitton Bracelet",cat:"Accessories"},
 {file:"IMG_3707.webp",name:"Louis Vuitton Imagination",cat:"Fragrances"},
@@ -152,7 +262,6 @@ const products = [
 {file:"IMG_3715.webp",name:"Nike Clothing Bundle",cat:"Mystery Boxes"},
 {file:"IMG_3716.webp",name:"Parfums de Marly Fragrance",cat:"Fragrances"},
 {file:"IMG_3717.webp",name:"Mixed Clothing Mystery Box",cat:"Mystery Boxes"},
-
 {file:"IMG_3718.webp",name:"Polo Ralph Lauren Bear T-Shirt",cat:"Clothing"},
 {file:"IMG_3719.webp",name:"Polo Ralph Lauren Clothing Bundle",cat:"Mystery Boxes"},
 {file:"IMG_3720.webp",name:"Polo Ralph Lauren Flag Sweater",cat:"Clothing"},
@@ -164,7 +273,6 @@ const products = [
 {file:"IMG_3728.webp",name:"Polo Ralph Lauren Sweatpants",cat:"Clothing"},
 {file:"IMG_3729.webp",name:"Polo Ralph Lauren T-Shirt — White",cat:"Clothing"},
 {file:"IMG_3730.webp",name:"Polo Ralph Lauren T-Shirt Bundle",cat:"Mystery Boxes"},
-
 {file:"IMG_3732.webp",name:"Rolex Datejust Watch",cat:"Accessories"},
 {file:"IMG_3733.webp",name:"Spider Graphic Hoodie",cat:"Clothing"},
 {file:"IMG_3734.webp",name:"Stone Island Hoodie",cat:"Clothing"},
@@ -188,304 +296,236 @@ const products = [
 {file:"IMG_3752.webp",name:"Yves Saint Laurent Fragrance",cat:"Fragrances"}
 ];
 
-const cats=["All","Clothing","Footwear","Accessories","Fragrances","Electronics","Mystery Boxes"];
-let active="All";
-let basket=[];
+const priceMap={
+"Essentials Hoodie — Grey":13.99,
+"Supreme Hoodie — Navy":13.99,
+"Supreme Denim Shorts":11.99,
+"Supreme T-Shirt — White":8.99,
+"Tom Ford Lost Cherry":8.99,
+"Valentino Fragrance":9.99,
+"Xerjoff Erba Pura":9.99,
+"Yeezy Slide — Beige":11.99
+};
 
-function drawChips(){
- document.getElementById("chips").innerHTML=cats.map(c=>
- `<button class="chip ${active===c?"active":""}" onclick="setCategory('${c}')">${c.toUpperCase()}</button>`
+const categories=["All","Clothing","Footwear","Accessories","Fragrances","Electronics","Mystery Boxes"];
+let activeCategory="All";
+let basket=[];
+let selectedProduct=null;
+let selectedColor="";
+let selectedSize="";
+let selectedQuantity=1;
+
+function money(price){
+ return price===undefined?"Hind täpsustamisel":"€"+price.toFixed(2);
+}
+
+function drawCategories(){
+ document.getElementById("chips").innerHTML=categories.map(c=>
+ `<button class="chip ${activeCategory===c?"active":""}" onclick="setCategory('${c}')">${c.toUpperCase()}</button>`
  ).join("");
 }
 
 function setCategory(c){
- active=c;
- drawChips();
+ activeCategory=c;
+ drawCategories();
  render();
+ document.getElementById("collection").scrollIntoView({behavior:"smooth"});
 }
 
 function render(){
  const q=document.getElementById("q").value.toLowerCase();
  let list=products.filter(p=>
- (active==="All"||p.cat===active)&&p.name.toLowerCase().includes(q)
+ (activeCategory==="All"||p.cat===activeCategory)&&
+ p.name.toLowerCase().includes(q)
  );
 
  const sort=document.getElementById("sort").value;
  if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
  if(sort==="za")list.sort((a,b)=>b.name.localeCompare(a.name));
+ if(sort==="low")list.sort((a,b)=>(priceMap[a.name]??Infinity)-(priceMap[b.name]??Infinity));
+ if(sort==="high")list.sort((a,b)=>(priceMap[b.name]??-1)-(priceMap[a.name]??-1));
 
  document.getElementById("count").textContent=list.length+" PRODUCTS";
 
  document.getElementById("grid").innerHTML=list.map(p=>`
- <article class="card">
-  <div class="photo">
-   <img src="./${p.file}" alt="${p.name}" loading="lazy">
-  </div>
+ <article class="card" onclick="openProduct('${p.file}')">
+  <div class="photo"><img src="./${p.file}" alt="${p.name}" loading="lazy"></div>
   <h3>${p.name}</h3>
   <div class="meta">${p.cat}</div>
-  <div class="price">Price on request</div>
-  <button onclick="add('${p.file}')">ADD TO BAG</button>
+  <div class="price">${money(priceMap[p.name])}</div>
+  <button onclick="event.stopPropagation();openProduct('${p.file}')">VIEW PRODUCT</button>
  </article>
  `).join("")||'<div class="empty">No products found.</div>';
 }
 
-function add(file){
- basket.push(file);
- document.getElementById("qty").textContent=basket.length;
+function drawOptions(id,values,chosen,onChoose){
+ const el=document.getElementById(id);
+ el.innerHTML="";
+ values.forEach(value=>{
+  const b=document.createElement("button");
+  b.type="button";
+  b.className="option"+(value===chosen?" selected":"");
+  b.textContent=value;
+  b.addEventListener("click",()=>onChoose(value));
+  el.appendChild(b);
+ });
 }
 
-function showBag(){
- document.getElementById("bag").style.display="block";
- document.getElementById("bagitems").innerHTML=basket.map(file=>{
-  const p=products.find(x=>x.file===file);
-  return `<div class="bagitem">${p.name} — Price on request</div>`;
+function openProduct(file){
+ selectedProduct=products.find(p=>p.file===file);
+ if(!selectedProduct)return;
+
+ const p=selectedProduct;
+ document.getElementById("detailImage").src="./"+p.file;
+ document.getElementById("detailName").textContent=p.name;
+ document.getElementById("detailCat").textContent=p.cat.toUpperCase();
+ document.getElementById("detailPrice").textContent=money(priceMap[p.name]);
+
+ const isClothing=p.cat==="Clothing";
+ const isFootwear=p.cat==="Footwear";
+ const colors=isClothing||isFootwear?["Black","White","Grey","Navy","Beige"]:["One size"];
+ const sizes=isClothing?["XS","S","M","L","XL"]:isFootwear?["39","40","41","42","43","44","45"]:["One size"];
+
+ selectedColor=colors[0];
+ selectedSize=sizes[0];
+ selectedQuantity=1;
+
+ drawOptions("colors",colors,selectedColor,value=>{
+  selectedColor=value;
+  drawOptions("colors",colors,selectedColor,arguments[0]);
+ });
+ drawOptions("sizes",sizes,selectedSize,value=>{
+  selectedSize=value;
+  drawOptions("sizes",sizes,selectedSize,arguments[0]);
+ });
+
+ drawOptions("quantities",["1","2","3"],"1",value=>{
+  selectedQuantity=Number(value);
+  drawOptions("quantities",["1","2","3"],String(selectedQuantity),chooseQuantity);
+ });
+ showPanel("detail");
+}
+
+function chooseColor(value){
+ selectedColor=value;
+}
+function chooseSize(value){
+ selectedSize=value;
+}
+function chooseQuantity(value){
+ selectedQuantity=Number(value);
+ drawOptions("quantities",["1","2","3"],String(selectedQuantity),chooseQuantity);
+}
+
+function showPanel(id){
+ document.querySelectorAll(".panel").forEach(p=>p.classList.remove("open"));
+ document.getElementById(id).classList.add("open");
+ document.body.style.overflow="hidden";
+}
+function closePanel(id){
+ document.getElementById(id).classList.remove("open");
+ document.body.style.overflow="";
+}
+
+function addToBag(){
+ if(!selectedProduct)return;
+ basket.push({
+  file:selectedProduct.file,
+  color:selectedColor,
+  size:selectedSize,
+  quantity:selectedQuantity
+ });
+ updateBagCount();
+ closePanel("detail");
+ openBag();
+}
+
+function updateBagCount(){
+ document.getElementById("qty").textContent=
+ basket.reduce((sum,item)=>sum+item.quantity,0);
+}
+
+function openBag(){
+ renderBag();
+ showPanel("bag");
+}
+
+function renderBag(){
+ let total=0;
+ let unknown=false;
+ const el=document.getElementById("bagItems");
+
+ el.innerHTML=basket.map((item,index)=>{
+  const p=products.find(x=>x.file===item.file);
+  if(!p)return "";
+  const price=priceMap[p.name];
+  if(price===undefined)unknown=true;
+  else total+=price*item.quantity;
+
+  return `<div class="bag-item">
+   <img src="./${p.file}" alt="">
+   <div>
+    <h3>${p.name}</h3>
+    <small>${item.color} · ${item.size}</small>
+    <div class="price">${money(price)}</div>
+    <div class="bag-actions">
+     <button onclick="changeQuantity(${index},-1)">−</button>
+     <span>${item.quantity}</span>
+     <button onclick="changeQuantity(${index},1)">+</button>
+     <button onclick="removeItem(${index})">REMOVE</button>
+    </div>
+   </div>
+  </div>`;
  }).join("")||"<p>Your bag is empty.</p>";
+
+ document.getElementById("bagTotal").textContent=
+ "Subtotal: €"+total.toFixed(2)+(unknown?" · Some prices need confirmation":"");
 }
 
-function hideBag(){
- document.getElementById("bag").style.display="none";
+function changeQuantity(index,change){
+ if(!basket[index])return;
+ basket[index].quantity+=change;
+ if(basket[index].quantity<1)basket.splice(index,1);
+ updateBagCount();
+ renderBag();
 }
 
-drawChips();
+function removeItem(index){
+ basket.splice(index,1);
+ updateBagCount();
+ renderBag();
+}
+
+function openCheckout(){
+ if(!basket.length){
+  alert("Your bag is empty.");
+  return;
+ }
+ document.getElementById("checkoutSummary").innerHTML=
+ basket.map(item=>{
+  const p=products.find(x=>x.file===item.file);
+  return p?`${p.name} × ${item.quantity} — ${money(priceMap[p.name])}`:"";
+ }).join("<br>");
+ showPanel("checkout");
+}
+
+document.getElementById("checkoutForm").addEventListener("submit",function(e){
+ e.preventDefault();
+ if(!this.reportValidity())return;
+ basket=[];
+ updateBagCount();
+ this.reset();
+ showPanel("confirmation");
+});
+
+function goHome(){
+ document.querySelectorAll(".panel").forEach(p=>p.classList.remove("open"));
+ document.body.style.overflow="";
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+
+drawCategories();
 render();
 </script>
- 
-<style>
-/* NEXORA layout */
-.categories{
- display:grid!important;
- grid-template-columns:repeat(3,minmax(0,1fr))!important;
- gap:9px!important;
-}
-.categories .chip{
- min-height:58px;
- padding:9px 4px!important;
- display:flex;
- align-items:center;
- justify-content:center;
- text-align:center;
- font-size:10px!important;
- letter-spacing:1px;
-}
-.card{cursor:pointer}
-.card .photo img{cursor:pointer}
-.card button{cursor:pointer}
-#nexora-detail{
- display:none;position:fixed;inset:0;background:#fff;
- z-index:100;overflow:auto;padding:15px 5% 40px;
-}
-#nexora-detail.open{display:block}
-.nd-head{
- display:flex;justify-content:space-between;align-items:center;
- border-bottom:1px solid #eee;padding:12px 0 18px;
-}
-.nd-head button{border:0;background:white;font-size:14px}
-.nd-content{max-width:760px;margin:20px auto}
-#nd-image{
- width:100%;max-height:480px;object-fit:contain;
- background:#f7f7f7;display:block;
-}
-#nd-name{font-size:clamp(25px,6vw,38px);font-weight:900;margin:22px 0 8px}
-#nd-price{font-size:28px;font-weight:900}
-.nd-label{font-weight:bold;margin:25px 0 10px}
-.nd-options{display:flex;gap:9px;flex-wrap:wrap}
-.nd-option{
- min-width:58px;padding:13px 16px;border:1px solid #ddd;
- background:white;font-weight:bold;
-}
-.nd-option.selected{background:#111;color:white;border-color:#111}
-#nd-add{
- width:100%;padding:18px;background:#111;color:white;
- border:0;font-weight:bold;margin-top:28px;
-}
-.nd-back{
- width:100%;padding:16px;background:white;
- border:1px solid #111;margin-top:10px;
-}
-@media(max-width:600px){
- .grid{grid-template-columns:repeat(2,minmax(0,1fr))}
- .categories{grid-template-columns:repeat(3,minmax(0,1fr))!important}
-}
-</style>
-
-<div id="nexora-detail">
- <div class="nd-head">
-  <strong class="logo">NEXORA</strong>
-  <button onclick="closeNexoraDetail()">CLOSE ✕</button>
- </div>
- <div class="nd-content">
-  <img id="nd-image" alt="">
-  <div class="meta" id="nd-cat"></div>
-  <div id="nd-name"></div>
-  <div id="nd-price"></div>
-
-  <div class="nd-label">Color</div>
-  <div class="nd-options" id="nd-colors"></div>
-
-  <div class="nd-label">Size</div>
-  <div class="nd-options" id="nd-sizes"></div>
-
-  <div class="nd-label">Quantity</div>
-  <div class="nd-options" id="nd-quantity">
-   <button class="nd-option selected" onclick="chooseNDQty(1)">1</button>
-   <button class="nd-option" onclick="chooseNDQty(2)">2</button>
-   <button class="nd-option" onclick="chooseNDQty(3)">3</button>
-  </div>
-
-  <button id="nd-add" onclick="addNDToBag()">ADD TO BAG</button>
-  <button class="nd-back" onclick="closeNexoraDetail()">BACK TO COLLECTION</button>
- </div>
-</div>
-
-<script>
-(()=>{
- const priceMap={
-  "Essentials Hoodie — Grey":13.99,
-  "Supreme Hoodie — Navy":13.99,
-  "Supreme Denim Shorts":11.99,
-  "Supreme T-Shirt — White":8.99,
-  "Tom Ford Lost Cherry":8.99,
-  "Valentino Fragrance":9.99,
-  "Xerjoff Erba Pura":9.99,
-  "Yeezy Slide — Beige":11.99
- };
-
- let selectedProduct=null;
- let selectedColor="";
- let selectedSize="";
- let selectedQty=1;
-
- const clothing=["Clothing"];
- const shoes=["Footwear"];
-
- function makeOptions(id,values,chosen,callback){
-  const el=document.getElementById(id);
-  el.innerHTML="";
-  values.forEach(value=>{
-   const b=document.createElement("button");
-   b.className="nd-option"+(value===chosen?" selected":"");
-   b.textContent=value;
-   b.onclick=()=>callback(value);
-   el.appendChild(b);
-  });
- }
-
- window.openNexoraDetail=function(file){
-  selectedProduct=products.find(p=>p.file===file);
-  if(!selectedProduct)return;
-
-  const p=selectedProduct;
-  const isClothing=clothing.includes(p.cat);
-  const isShoes=shoes.includes(p.cat);
-
-  document.getElementById("nd-image").src="./"+p.file;
-  document.getElementById("nd-name").textContent=p.name;
-  document.getElementById("nd-cat").textContent=p.cat.toUpperCase();
-
-  const price=priceMap[p.name];
-  document.getElementById("nd-price").textContent=
-   price===undefined?"Price on request":"€"+price.toFixed(2);
-
-  const colorOptions=isClothing||isShoes?
-   ["Black","White","Grey","Navy","Beige"]:["One size"];
-
-  const sizeOptions=isClothing?
-   ["XS","S","M","L","XL"]:
-   isShoes?["39","40","41","42","43","44","45"]:["One size"];
-
-  selectedColor=colorOptions[0];
-  selectedSize=sizeOptions[0];
-  selectedQty=1;
-
-  makeOptions("nd-colors",colorOptions,selectedColor,v=>{
-   selectedColor=v;
-   makeOptions("nd-colors",colorOptions,selectedColor,arguments.callee);
-  });
-
-  makeOptions("nd-sizes",sizeOptions,selectedSize,v=>{
-   selectedSize=v;
-   makeOptions("nd-sizes",sizeOptions,selectedSize,arguments.callee);
-  });
-
-  chooseNDQty(1);
-  document.getElementById("nexora-detail").classList.add("open");
-  document.body.style.overflow="hidden";
- };
-
- window.chooseNDQty=function(n){
-  selectedQty=n;
-  document.querySelectorAll("#nd-quantity button").forEach((b,i)=>{
-   b.classList.toggle("selected",i+1===n);
-  });
- };
-
- window.closeNexoraDetail=function(){
-  document.getElementById("nexora-detail").classList.remove("open");
-  document.body.style.overflow="";
- };
-
- window.addNDToBag=function(){
-  if(!selectedProduct)return;
-  for(let i=0;i<selectedQty;i++){
-   basket.push({
-    file:selectedProduct.file,
-    color:selectedColor,
-    size:selectedSize
-   });
-  }
-  document.getElementById("qty").textContent=basket.length;
-  closeNexoraDetail();
-  showBag();
- };
-
- window.render=function(){
-  const q=document.getElementById("q").value.toLowerCase();
-  let list=products.filter(p=>
-   (active==="All"||p.cat===active)&&
-   p.name.toLowerCase().includes(q)
-  );
-  const sort=document.getElementById("sort").value;
-  if(sort==="az")list.sort((a,b)=>a.name.localeCompare(b.name));
-  if(sort==="za")list.sort((a,b)=>b.name.localeCompare(a.name));
-
-  document.getElementById("count").textContent=list.length+" PRODUCTS";
-
-  document.getElementById("grid").innerHTML=list.map(p=>{
-   const price=priceMap[p.name];
-   return `<article class="card" onclick="openNexoraDetail('${p.file}')">
-    <div class="photo">
-     <img src="./${p.file}" alt="${p.name}" loading="lazy">
-    </div>
-    <h3>${p.name}</h3>
-    <div class="meta">${p.cat}</div>
-    <div class="price">${price===undefined?"Price on request":"€"+price.toFixed(2)}</div>
-    <button onclick="event.stopPropagation();openNexoraDetail('${p.file}')">VIEW PRODUCT</button>
-   </article>`;
-  }).join("")||'<div class="empty">No products found.</div>';
- };
-
- window.showBag=function(){
-  document.getElementById("bag").style.display="block";
-  document.getElementById("bagitems").innerHTML=basket.map((item,i)=>{
-   const file=typeof item==="string"?item:item.file;
-   const p=products.find(x=>x.file===file);
-   if(!p)return "";
-   const options=typeof item==="string"?"":`<br><small>${item.color} · ${item.size}</small>`;
-   return `<div class="bagitem">${p.name}${options}
-    <button onclick="removeNexoraItem(${i})">×</button></div>`;
-  }).join("")||"<p>Your bag is empty.</p>";
-  document.getElementById("sum").textContent="Demo catalogue";
- };
-
- window.removeNexoraItem=function(i){
-  basket.splice(i,1);
-  document.getElementById("qty").textContent=basket.length;
-  showBag();
- };
-
- render();
-})();
-</script>
-
 </body>
 </html>
