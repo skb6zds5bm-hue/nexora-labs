@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="et">
 <head>
@@ -130,8 +131,6 @@ footer p{color:#aaa;font-size:11px;line-height:1.8}
 <div class="meta" id="detailCat"></div>
 <div class="detail-name" id="detailName"></div>
 <div class="detail-price" id="detailPrice"></div>
-<div class="label">Color</div>
-<div class="options" id="colors"></div>
 <div class="label">Size</div>
 <div class="options" id="sizes"></div>
 <div class="label">Quantity</div>
@@ -373,9 +372,10 @@ const originalPriceMap={
 "Yves Saint Laurent Fragrance":160
 };
 
+// 80% discount: customer pays 20% of original price.
 const priceMap=Object.fromEntries(
  Object.entries(originalPriceMap).map(([name,original])=>[
-  name,Math.round(original*0.4*100)/100
+  name,Math.round(original*0.2*100)/100
  ])
 );
 
@@ -383,7 +383,6 @@ const categories=["All","Clothing","Footwear","Accessories","Fragrances","Electr
 let activeCategory="All";
 let basket=[];
 let selectedProduct=null;
-let selectedColor="";
 let selectedSize="";
 let selectedQuantity=1;
 
@@ -395,7 +394,7 @@ function priceHTML(name){
  const original=originalPriceMap[name];
  const sale=priceMap[name];
  if(original===undefined)return money(sale);
- return `<span class="old-price">€${original.toFixed(2)}</span><strong>${money(sale)}</strong><span class="discount">−60%</span>`;
+ return `<span class="old-price">€${original.toFixed(2)}</span><strong>${money(sale)}</strong><span class="discount">−80%</span>`;
 }
 
 function drawCategories(){
@@ -462,26 +461,24 @@ function openProduct(file){
 
  const isClothing=p.cat==="Clothing";
  const isFootwear=p.cat==="Footwear";
- const colors=isClothing||isFootwear?["Black","White","Grey","Navy","Beige"]:["One size"];
- const sizes=isClothing?["XS","S","M","L","XL"]:isFootwear?["39","40","41","42","43","44","45"]:["One size"];
 
- selectedColor=colors[0];
+ const sizes=isClothing
+  ?["XS","S","M","L","XL"]
+  :isFootwear
+  ?["39","40","41","42","43","44","45"]
+  :["One size"];
+
  selectedSize=sizes[0];
  selectedQuantity=1;
-
- const updateColor=value=>{
-  selectedColor=value;
-  drawOptions("colors",colors,selectedColor,updateColor);
- };
- drawOptions("colors",colors,selectedColor,updateColor);
 
  const updateSize=value=>{
   selectedSize=value;
   drawOptions("sizes",sizes,selectedSize,updateSize);
  };
- drawOptions("sizes",sizes,selectedSize,updateSize);
 
+ drawOptions("sizes",sizes,selectedSize,updateSize);
  drawOptions("quantities",["1","2","3"],"1",chooseQuantity);
+
  showPanel("detail");
 }
 
@@ -505,7 +502,6 @@ function addToBag(){
  if(!selectedProduct)return;
  basket.push({
   file:selectedProduct.file,
-  color:selectedColor,
   size:selectedSize,
   quantity:selectedQuantity
  });
@@ -538,7 +534,7 @@ function renderBag(){
    <img src="./${p.file}" alt="">
    <div>
     <h3>${p.name}</h3>
-    <small>${item.color} · ${item.size}</small>
+    <small>Size: ${item.size}</small>
     <div class="price">${priceHTML(p.name)}</div>
     <div class="bag-actions">
      <button onclick="changeQuantity(${index},-1)">−</button>
